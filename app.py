@@ -47,13 +47,14 @@ def get_thumbnail(user):
 
   logger.debug("Connection: {}".format(conn))
 
+  attribPhoto = os.getenv("LDAP_ATTRIBUTE", 'thumbnailPhoto')
   conn.search(os.getenv("LDAP_BASE"), "({}={})".format(os.getenv("LDAP_LOOKUP"), user),
-              attributes=['objectclass', 'cn', 'thumbnailPhoto'])
+              attributes=['objectclass', 'cn', attribPhoto])
 
   if conn.entries:
     logger.debug("Entries: {}".format(conn.entries))
-    if 'thumbnailPhoto' in conn.entries[0].entry_attributes:
-      image_binary = conn.entries[0]['thumbnailPhoto'].value
+    if attribPhoto in conn.entries[0].entry_attributes:
+      image_binary = conn.entries[0][attribPhoto].value
       if image_binary:
         if isBase64(image_binary):
           image_binary = base64.b64decode(image_binary)
