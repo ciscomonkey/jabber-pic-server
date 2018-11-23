@@ -40,7 +40,7 @@ def isBase64(s):
 def get_thumbnail(user):
   logger.debug("Got request for user: {}".format(user))
   try:
-    server = Server(os.getenv("LDAP_SERVER"))
+    server = Server(os.getenv("LDAP_SERVER"), port=os.getenv("LDAP_PORT", 389))
     conn = Connection(server, os.getenv("LDAP_USER"), os.getenv("LDAP_PASS"), auto_bind=True)
   except Exception as e:
     abort(500)
