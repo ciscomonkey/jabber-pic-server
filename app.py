@@ -92,9 +92,12 @@ def main(args):
   # Load .env file
   load_dotenv(dotenv_path=args.config)
   logger.debug("LDAP Server: {}".format(os.getenv("LDAP_SERVER")))
+  logger.debug("LDAP Port: {}".format(os.getenv("LDAP_PORT")))
+  logger.debug("LDAP SSL: {}".format(os.getenv("LDAP_SSL")))
   logger.debug("LDAP User: {}".format(os.getenv("LDAP_USER")))
   logger.debug("LDAP Base: {}".format(os.getenv("LDAP_BASE")))
   logger.debug("LDAP Lookup: {}".format(os.getenv("LDAP_LOOKUP")))
+  logger.debug("LDAP Photot Attribute: {}".format(os.getenv("LDAP_ATTRIBUTE")))
   app.run(debug=args.debug)
 
 
